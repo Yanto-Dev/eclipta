@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclipta Tent Circle - Komunitas Camping & Outdoor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Syne (Retro Display), Plus Jakarta Sans (Body), Playfair Display (Accent) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Syne:wght@700;800&family=Cabinet+Grotesk:wght@800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'forest-green': '#1E392A',
+                        'deep-pine': '#14271C',
+                        'ochre-yellow': '#E5A93C',
+                        'mustard-light': '#F4C46A',
+                        'rust-orange': '#C85A32',
+                        'terracotta': '#A34321',
+                        'vintage-cream': '#F9F5EC',
+                        'card-cream': '#FAF6EE',
+                        'charcoal-dark': '#1C1E1B',
+                        'slate-gray': '#3D433E'
+                    },
+                    fontFamily: {
+                        'retro': ['Syne', 'sans-serif'],
+                        'sans': ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'retro-sm': '3px 3px 0px #1C1E1B',
+                        'retro': '5px 5px 0px #1C1E1B',
+                        'retro-lg': '8px 8px 0px #1C1E1B',
+                        'retro-orange': '6px 6px 0px #C85A32',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom noise overlay & retro styles */
+        .bg-noise {
+            background-image: radial-gradient(rgba(30, 57, 42, 0.08) 1px, transparent 0);
+            background-size: 16px 16px;
+        }
+        .retro-border {
+            border: 3px solid #1C1E1B;
+        }
+        .polaroid-tilt-1 {
+            transform: rotate(-2deg);
+        }
+        .polaroid-tilt-2 {
+            transform: rotate(2.5deg);
+        }
+        .polaroid-tilt-3 {
+            transform: rotate(-1.5deg);
+        }
+        .polaroid-tilt-1:hover, .polaroid-tilt-2:hover, .polaroid-tilt-3:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+    </style>
+</head>
+<body class="bg-vintage-cream text-charcoal-dark font-sans bg-noise selection:bg-ochre-yellow selection:text-charcoal-dark overflow-x-hidden">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-vintage-cream/90 backdrop-blur-md border-b-4 border-charcoal-dark transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Badge -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 bg-ochre-yellow rounded-full border-2 border-charcoal-dark shadow-retro-sm flex items-center justify-center text-forest-green font-retro font-extrabold text-xl group-hover:bg-rust-orange group-hover:text-vintage-cream transition-colors">
+                    <i class="fa-solid font-bold fa-campground"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-retro font-extrabold text-lg tracking-wider uppercase text-forest-green leading-tight">ECLIPTA</span>
+                    <span class="text-xs font-bold tracking-widest text-rust-orange uppercase">Tent Circle</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 font-bold text-sm tracking-wide">
+                <a href="#about" class="hover:text-rust-orange transition-colors">Tentang Kami</a>
+                <a href="#features" class="hover:text-rust-orange transition-colors">Aktivitas</a>
+                <a href="#gallery" class="hover:text-rust-orange transition-colors">Galeri Trip</a>
+                <a href="#events" class="hover:text-rust-orange transition-colors">Jadwal Camp</a>
+                <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="flex items-center gap-2 text-forest-green hover:text-rust-orange">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                    <span>@eclipta_tent_circle</span>
+                </a>
+            </nav>
+
+            <!-- CTA Join Button Header -->
+            <div class="hidden sm:block">
+                <button onclick="openJoinModal()" class="px-5 py-2.5 bg-rust-orange text-vintage-cream font-retro font-bold text-sm uppercase rounded-lg border-2 border-charcoal-dark shadow-retro hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                    Gabung Circle <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobileMenuBtn" class="p-2 text-charcoal-dark focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-card-cream border-t-2 border-charcoal-dark px-4 pt-4 pb-6 space-y-3">
+            <a href="#about" class="block px-3 py-2 rounded-md font-bold text-charcoal-dark hover:bg-ochre-yellow/30">Tentang Kami</a>
+            <a href="#features" class="block px-3 py-2 rounded-md font-bold text-charcoal-dark hover:bg-ochre-yellow/30">Aktivitas</a>
+            <a href="#gallery" class="block px-3 py-2 rounded-md font-bold text-charcoal-dark hover:bg-ochre-yellow/30">Galeri Trip</a>
+            <a href="#events" class="block px-3 py-2 rounded-md font-bold text-charcoal-dark hover:bg-ochre-yellow/30">Jadwal Camp</a>
+            <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="block px-3 py-2 rounded-md font-bold text-forest-green hover:bg-ochre-yellow/30">
+                <i class="fa-brands fa-instagram mr-2"></i> Instagram Official
+            </a>
+            <button onclick="openJoinModal()" class="w-full mt-2 px-5 py-3 bg-rust-orange text-vintage-cream font-retro font-bold text-sm uppercase rounded-lg border-2 border-charcoal-dark shadow-retro">
+                Gabung Circle
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-10 left-5 text-ochre-yellow opacity-40 text-6xl select-none pointer-events-none">★</div>
+        <div class="absolute top-40 right-10 text-rust-orange opacity-30 text-5xl select-none pointer-events-none">✦</div>
+        <div class="absolute bottom-10 left-1/4 text-forest-green opacity-20 text-4xl select-none pointer-events-none">★</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column Text Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    
+                    <!-- Retro Badge Pill -->
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ochre-yellow/20 border-2 border-charcoal-dark text-forest-green font-bold text-xs sm:text-sm tracking-wide shadow-retro-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rust-orange animate-pulse"></span>
+                        <span>ECLIPTA OUTDOOR & CAMPING COMMUNITY</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="font-retro font-extrabold text-4xl sm:text-6xl lg:text-7xl text-forest-green leading-[1.1] tracking-tight">
+                        Menyatu dengan Alam, <span class="bg-ochre-yellow px-2 border-b-4 border-charcoal-dark inline-block mt-1">Beratap Bintang</span>
+                    </h1>
+
+                    <!-- Paragraph -->
+                    <p class="text-base sm:text-lg text-slate-gray max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
+                        Lingkaran kehangatan bagi pecinta camping, outdoor enthusiast, dan penikmat keheningan alam semesta. Tempat kita berbagi cerita di hangatnya api unggun.
+                    </p>
+
+                    <!-- CTA Group -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <button onclick="openJoinModal()" class="w-full sm:w-auto px-8 py-4 bg-rust-orange text-vintage-cream font-retro font-bold text-base rounded-xl border-3 border-charcoal-dark shadow-retro-lg hover:bg-terracotta hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-retro transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-tent text-xl"></i>
+                            <span>Gabung Komunitas</span>
+                        </button>
+                        <a href="#events" class="w-full sm:w-auto px-8 py-4 bg-vintage-cream text-forest-green font-retro font-bold text-base rounded-xl border-3 border-charcoal-dark shadow-retro hover:bg-ochre-yellow/30 hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-calendar-check text-xl"></i>
+                            <span>Lihat Trip Bareng</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Info Icons -->
+                    <div class="pt-6 flex items-center justify-center lg:justify-start gap-8 text-xs font-bold text-slate-gray">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-tree text-forest-green text-lg"></i>
+                            <span>Leave No Trace</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-fire text-rust-orange text-lg"></i>
+                            <span>Good Camp Vibes</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-compass text-ochre-yellow text-lg"></i>
+                            <span>All Gear Welcome</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Visual Retro Stamp & Photo Card -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    
+                    <!-- Main Frame Card -->
+                    <div class="relative w-full max-w-md bg-card-cream rounded-2xl border-4 border-charcoal-dark p-4 shadow-retro-lg transform lg:rotate-2 hover:rotate-0 transition-transform duration-300">
+                        
+                        <!-- Top Retro Badge Stamp -->
+                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-rust-orange rounded-full border-3 border-charcoal-dark flex flex-col items-center justify-center text-vintage-cream font-retro text-center p-2 shadow-retro transform rotate-12 z-20">
+                            <span class="text-[10px] leading-none uppercase font-bold">EST. 2023</span>
+                            <span class="text-xs font-extrabold my-0.5">ECLIPTA</span>
+                            <i class="fa-solid fa-moon text-ochre-yellow text-xs"></i>
+                        </div>
+
+                        <!-- Image Frame -->
+                        <div class="relative rounded-xl border-3 border-charcoal-dark overflow-hidden bg-forest-green h-80 sm:h-96">
+                            <img src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1000&auto=format&fit=crop" 
+                                 alt="Eclipta Camping Night" 
+                                 class="w-full h-full object-cover filter brightness-90 hover:scale-105 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/600x800/1E392A/F9F5EC?text=Eclipta+Camp+Night'">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark/80 via-transparent to-transparent"></div>
+                            
+                            <!-- Caption Overlay -->
+                            <div class="absolute bottom-4 left-4 right-4 text-vintage-cream">
+                                <span class="bg-ochre-yellow text-charcoal-dark px-2 py-0.5 font-bold text-xs uppercase border border-charcoal-dark rounded mb-1 inline-block">
+                                    Night Circle Gathering
+                                </span>
+                                <h3 class="font-retro font-bold text-lg text-vintage-cream">Under The Celestial Canopy</h3>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Card Details -->
+                        <div class="mt-4 pt-3 border-t-2 border-dashed border-charcoal-dark/30 flex items-center justify-between text-xs font-bold text-forest-green">
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-location-dot text-rust-orange"></i> Mt. Pangrango Camp Base
+                            </span>
+                            <span class="bg-forest-green text-vintage-cream px-2 py-1 rounded border border-charcoal-dark">
+                                ⭐ Open Membership
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-16 bg-forest-green text-vintage-cream border-y-4 border-charcoal-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column Text -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-block px-3 py-1 bg-rust-orange text-vintage-cream border-2 border-charcoal-dark rounded font-retro text-xs uppercase tracking-widest shadow-retro-sm">
+                        Siapa Kami
+                    </div>
+                    <h2 class="font-retro font-extrabold text-3xl sm:text-5xl text-ochre-yellow leading-tight">
+                        Wadah Penggiat Tenda & Penikmat Sunyi Malam
+                    </h2>
+                    <p class="text-vintage-cream/90 text-base sm:text-lg leading-relaxed font-light">
+                        <strong class="font-bold text-ochre-yellow">Eclipta Tent Circle</strong> lahir dari kerinduan akan hangatnya persahabatan di sekeliling api unggun. Kami bukan sekadar klub kemping biasa; kami adalah ruang berbagi tips gear, overland trip, serta upaya kolektif menjaga kebersihan habitat alam yang kita singgahi.
+                    </p>
+                    <p class="text-vintage-cream/80 text-sm sm:text-base leading-relaxed">
+                        Mulai dari kemping santai keluarga, solo camper, hingga ekspedisi alam bebas, kami membuka pintu lebar bagi siapa saja yang ingin melarikan diri sejenak dari penatnya kota.
+                    </p>
+
+                    <!-- Quote Box -->
+                    <div class="p-4 bg-deep-pine rounded-xl border-2 border-ochre-yellow/40 italic text-sm text-ochre-yellow/90">
+                        "Di bawah langit yang sama, setiap tenda menyimpan cerita dan rasa persaudaraan yang tak ternilai."
+                    </div>
+                </div>
+
+                <!-- Right Column Stat Counters -->
+                <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    <!-- Stat 1 -->
+                    <div class="bg-card-cream text-charcoal-dark p-6 rounded-xl border-3 border-charcoal-dark shadow-retro text-center flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-campground text-3xl text-rust-orange mb-2"></i>
+                        <span class="font-retro font-extrabold text-4xl text-forest-green">50+</span>
+                        <span class="font-bold text-xs uppercase text-slate-gray mt-1">Camp Trips Done</span>
+                    </div>
+
+                    <!-- Stat 2 -->
+                    <div class="bg-card-cream text-charcoal-dark p-6 rounded-xl border-3 border-charcoal-dark shadow-retro text-center flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-users text-3xl text-ochre-yellow mb-2"></i>
+                        <span class="font-retro font-extrabold text-4xl text-forest-green">300+</span>
+                        <span class="font-bold text-xs uppercase text-slate-gray mt-1">Circle Members</span>
+                    </div>
+
+                    <!-- Stat 3 -->
+                    <div class="bg-card-cream text-charcoal-dark p-6 rounded-xl border-3 border-charcoal-dark shadow-retro text-center flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-leaf text-3xl text-forest-green mb-2"></i>
+                        <span class="font-retro font-extrabold text-4xl text-forest-green">100%</span>
+                        <span class="font-bold text-xs uppercase text-slate-gray mt-1">Leave No Trace</span>
+                    </div>
+
+                    <!-- Stat 4 -->
+                    <div class="bg-card-cream text-charcoal-dark p-6 rounded-xl border-3 border-charcoal-dark shadow-retro text-center flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-mug-hot text-3xl text-terracotta mb-2"></i>
+                        <span class="font-retro font-extrabold text-4xl text-forest-green">∞</span>
+                        <span class="font-bold text-xs uppercase text-slate-gray mt-1">Cangkir Kopi Pagi</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features / Activity Cards -->
+    <section id="features" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="bg-ochre-yellow text-charcoal-dark px-3 py-1 font-retro text-xs uppercase border-2 border-charcoal-dark rounded shadow-retro-sm">
+                Apa Yang Kita Lakukan
+            </span>
+            <h2 class="font-retro font-extrabold text-3xl sm:text-5xl text-forest-green mt-3">
+                Keseruan Di Eclipta Circle
+            </h2>
+            <p class="text-slate-gray font-medium text-base mt-2">
+                Aktivitas rutin yang dirancang untuk mempererat hubungan antar camper dan menikmati keindahan alam secara bertanggung jawab.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <!-- Card 1 -->
+            <div class="bg-card-cream rounded-2xl border-3 border-charcoal-dark p-6 shadow-retro hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="w-14 h-14 bg-ochre-yellow rounded-xl border-2 border-charcoal-dark flex items-center justify-center text-forest-green text-2xl shadow-retro-sm mb-6">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h3 class="font-retro font-extrabold text-xl text-forest-green mb-2">Weekend Campouts</h3>
+                    <p class="text-slate-gray text-sm leading-relaxed">
+                        Agenda kemping bareng akhir pekan di berbagai lokasi eksotis: gunung, bukit, sungai, hingga pantai.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t-2 border-dashed border-charcoal-dark/20 text-xs font-bold text-rust-orange">
+                    ★ Rutin Tiap Bulan
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-card-cream rounded-2xl border-3 border-charcoal-dark p-6 shadow-retro hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="w-14 h-14 bg-rust-orange rounded-xl border-2 border-charcoal-dark flex items-center justify-center text-vintage-cream text-2xl shadow-retro-sm mb-6">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="font-retro font-extrabold text-xl text-forest-green mb-2">Gear Sharing & Tips</h3>
+                    <p class="text-slate-gray text-sm leading-relaxed">
+                        Saling bertukar wawasan tentang memilih tenda, perawatan perlengkapan outdoor, hingga DIY camping gear.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t-2 border-dashed border-charcoal-dark/20 text-xs font-bold text-rust-orange">
+                    ★ Sesi Edukasi
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-card-cream rounded-2xl border-3 border-charcoal-dark p-6 shadow-retro hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="w-14 h-14 bg-forest-green rounded-xl border-2 border-charcoal-dark flex items-center justify-center text-ochre-yellow text-2xl shadow-retro-sm mb-6">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <h3 class="font-retro font-extrabold text-xl text-forest-green mb-2">Stargazing & Movie</h3>
+                    <p class="text-slate-gray text-sm leading-relaxed">
+                        Menikmati bioskop alam terbuka dengan proyektor di tengah hutan sambil mengamati rasi bintang malam.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t-2 border-dashed border-charcoal-dark/20 text-xs font-bold text-rust-orange">
+                    ★ Night Event
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-card-cream rounded-2xl border-3 border-charcoal-dark p-6 shadow-retro hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="w-14 h-14 bg-terracotta rounded-xl border-2 border-charcoal-dark flex items-center justify-center text-vintage-cream text-2xl shadow-retro-sm mb-6">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3 class="font-retro font-extrabold text-xl text-forest-green mb-2">Eco Camping Initiative</h3>
+                    <p class="text-slate-gray text-sm leading-relaxed">
+                        Aksi nyata pembersihan sampah di area campsite (Clean Up Camp) dan penanaman pohon berkala.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t-2 border-dashed border-charcoal-dark/20 text-xs font-bold text-rust-orange">
+                    ★ Kelestarian Alam
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Interactive Polaroid Gallery -->
+    <section id="gallery" class="py-20 bg-deep-pine text-vintage-cream border-t-4 border-charcoal-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14">
+                <div>
+                    <span class="bg-rust-orange text-vintage-cream px-3 py-1 font-retro text-xs uppercase border border-vintage-cream rounded">
+                        Momen Keren
+                    </span>
+                    <h2 class="font-retro font-extrabold text-3xl sm:text-5xl text-ochre-yellow mt-2">
+                        Jejak Langkah & Foto Trip
+                    </h2>
+                </div>
+                <p class="text-vintage-cream/70 text-sm max-w-md mt-4 md:mt-0">
+                    Kumpulan bidikan lensa kawan-kawan Eclipta. Klik foto untuk melihat tampilan lebih besar.
+                </p>
+            </div>
+
+            <!-- Polaroid Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Polaroid 1 -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=1000&auto=format&fit=crop', 'Sunrise Brew at Ranca Upas')" 
+                     class="bg-vintage-cream text-charcoal-dark p-4 rounded-xl border-3 border-charcoal-dark shadow-retro-lg polaroid-tilt-1 transition-all duration-300 cursor-pointer group">
+                    <div class="h-64 overflow-hidden rounded border-2 border-charcoal-dark bg-charcoal-dark">
+                        <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Sunrise Coffee" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x600/1E392A/F9F5EC?text=Morning+Coffee'">
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="font-retro font-bold text-lg text-forest-green">Kopi Pagi di Danau</p>
+                        <span class="text-xs text-slate-gray font-medium">Ciwidey Camp - Vol. 12</span>
+                    </div>
+                </div>
+
+                <!-- Polaroid 2 -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=1000&auto=format&fit=crop', 'Starry Night Tent')" 
+                     class="bg-vintage-cream text-charcoal-dark p-4 rounded-xl border-3 border-charcoal-dark shadow-retro-lg polaroid-tilt-2 transition-all duration-300 cursor-pointer group">
+                    <div class="h-64 overflow-hidden rounded border-2 border-charcoal-dark bg-charcoal-dark">
+                        <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Starry Night Tent" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x600/1E392A/F9F5EC?text=Under+The+Stars'">
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="font-retro font-bold text-lg text-forest-green">Malam Bertabur Bintang</p>
+                        <span class="text-xs text-slate-gray font-medium">Bukit Allejo Overland</span>
+                    </div>
+                </div>
+
+                <!-- Polaroid 3 -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1537225228614-56cc3556d7ed?q=80&w=1000&auto=format&fit=crop', 'Campfire Circle Stories')" 
+                     class="bg-vintage-cream text-charcoal-dark p-4 rounded-xl border-3 border-charcoal-dark shadow-retro-lg polaroid-tilt-3 transition-all duration-300 cursor-pointer group">
+                    <div class="h-64 overflow-hidden rounded border-2 border-charcoal-dark bg-charcoal-dark">
+                        <img src="https://images.unsplash.com/photo-1537225228614-56cc3556d7ed?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Campfire Circle" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x600/1E392A/F9F5EC?text=Campfire+Circle'">
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="font-retro font-bold text-lg text-forest-green">Lingkaran Api Unggun</p>
+                        <span class="text-xs text-slate-gray font-medium">Hutan Pinus Rahong</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Events & Trip Schedule -->
+    <section id="events" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-14">
+            <span class="bg-rust-orange text-vintage-cream px-3 py-1 font-retro text-xs uppercase border-2 border-charcoal-dark rounded shadow-retro-sm">
+                Jadwal Trip
+            </span>
+            <h2 class="font-retro font-extrabold text-3xl sm:text-5xl text-forest-green mt-3">
+                Camp Bareng Mendatang
+            </h2>
+            <p class="text-slate-gray font-medium text-base mt-2">
+                Pilih tanggalnya, siapkan tendamu, dan gabung dalam lingkaran petualangan Eclipta berikutnya!
+            </p>
+        </div>
+
+        <!-- Events List -->
+        <div class="space-y-6">
+            
+            <!-- Event Item 1 -->
+            <div class="bg-card-cream rounded-2xl border-3 border-charcoal-dark p-6 shadow-retro flex flex-col md:flex-row items-center justify-between gap-6 hover:bg-ochre-yellow/10 transition-colors">
+                <div class="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                    <div class="bg-rust-orange text-vintage-cream rounded-xl p-4 border-2 border-charcoal-dark w-28 text-center flex-shrink-0 shadow-retro-sm">
+                        <span class="block text-xs font-bold uppercase tracking-wider">NOV 2026</span>
+                        <span class="font-retro font-extrabold text-3xl">18-19</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                            <span class="bg-forest-green text-vintage-cream text-[10px] uppercase font-bold px-2 py-0.5 rounded">Weekend Gathering</span>
+                            <span class="text-xs text-rust-orange font-bold"><i class="fa-solid fa-fire"></i> Sisa 5 Tenda</span>
+                        </div>
+                        <h3 class="font-retro font-extrabold text-2xl text-forest-green">Eclipta Stargazing Night #14</h3>
+                        <p class="text-slate-gray text-sm mt-1">
+                            <i class="fa-solid fa-location-dot text-rust-orange"></i> Gunung Pancar, Sentul • Easy Access & Fun Camp
+                        </p>
+                    </div>
+                </div>
+                <button onclick="openJoinModal('Stargazing Night Sentul')" class="w-full md:w-auto px-6 py-3 bg-ochre-yellow text-charcoal-dark font-retro font-bold text-sm uppercase rounded-xl border-2 border-charcoal-dark shadow-retro hover:bg-mustard-light hover:translate-x-[2px] hover:translate-y-[2px] transition-all whitespace-nowrap">
+                    Daftar Trip <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+
+            <!-- Event Item 2 -->
+            <div class="bg-card-cream rounded-2xl border-3 border-charcoal-dark p-6 shadow-retro flex flex-col md:flex-row items-center justify-between gap-6 hover:bg-ochre-yellow/10 transition-colors">
+                <div class="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                    <div class="bg-forest-green text-vintage-cream rounded-xl p-4 border-2 border-charcoal-dark w-28 text-center flex-shrink-0 shadow-retro-sm">
+                        <span class="block text-xs font-bold uppercase tracking-wider text-ochre-yellow">DES 2026</span>
+                        <span class="font-retro font-extrabold text-3xl text-ochre-yellow">05-06</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                            <span class="bg-rust-orange text-vintage-cream text-[10px] uppercase font-bold px-2 py-0.5 rounded">Overland & River</span>
+                            <span class="text-xs text-forest-green font-bold"><i class="fa-solid fa-check"></i> Registration Open</span>
+                        </div>
+                        <h3 class="font-retro font-extrabold text-2xl text-forest-green">Riverside Chill & Coffee Brew</h3>
+                        <p class="text-slate-gray text-sm mt-1">
+                            <i class="fa-solid fa-location-dot text-rust-orange"></i> Sungai Palayangan, Pangalengan • Camping & River Tubing
+                        </p>
+                    </div>
+                </div>
+                <button onclick="openJoinModal('Riverside Camp Pangalengan')" class="w-full md:w-auto px-6 py-3 bg-ochre-yellow text-charcoal-dark font-retro font-bold text-sm uppercase rounded-xl border-2 border-charcoal-dark shadow-retro hover:bg-mustard-light hover:translate-x-[2px] hover:translate-y-[2px] transition-all whitespace-nowrap">
+                    Daftar Trip <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Instagram Banner Section -->
+    <section class="py-16 bg-ochre-yellow/20 border-y-4 border-charcoal-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-vintage-cream rounded-full border-2 border-charcoal-dark shadow-retro-sm mb-4">
+                <i class="fa-brands fa-instagram text-rust-orange text-xl"></i>
+                <span class="font-retro font-bold text-sm text-forest-green">@eclipta_tent_circle</span>
+            </div>
+
+            <h2 class="font-retro font-extrabold text-3xl sm:text-4xl text-forest-green">
+                Ikuti Cerita Harian Kami Di Instagram
+            </h2>
+            <p class="text-slate-gray font-medium text-sm sm:text-base max-w-xl mx-auto mt-2 mb-8">
+                Dapatkan update lokasi camp terbaru, rekomendasi perlengkapan, dan dokumentasi momen hangat langsung dari feeds kami.
+            </p>
+
+            <!-- Instagram Grid Preview Tape Style -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="block rounded-xl border-3 border-charcoal-dark overflow-hidden bg-card-cream shadow-retro hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=500&auto=format&fit=crop" alt="IG Post 1" class="w-full h-40 object-cover" onerror="this.src='https://placehold.co/400x400/1E392A/F9F5EC?text=IG+Feed+1'">
+                </a>
+                <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="block rounded-xl border-3 border-charcoal-dark overflow-hidden bg-card-cream shadow-retro hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1496080174650-637e3f22fa03?q=80&w=500&auto=format&fit=crop" alt="IG Post 2" class="w-full h-40 object-cover" onerror="this.src='https://placehold.co/400x400/1E392A/F9F5EC?text=IG+Feed+2'">
+                </a>
+                <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="block rounded-xl border-3 border-charcoal-dark overflow-hidden bg-card-cream shadow-retro hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1517824806704-9040b037703b?q=80&w=500&auto=format&fit=crop" alt="IG Post 3" class="w-full h-40 object-cover" onerror="this.src='https://placehold.co/400x400/1E392A/F9F5EC?text=IG+Feed+3'">
+                </a>
+                <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="block rounded-xl border-3 border-charcoal-dark overflow-hidden bg-card-cream shadow-retro hover:scale-105 transition-transform">
+                    <img src="https://images.unsplash.com/photo-1532339142463-fd0a8979791a?q=80&w=500&auto=format&fit=crop" alt="IG Post 4" class="w-full h-40 object-cover" onerror="this.src='https://placehold.co/400x400/1E392A/F9F5EC?text=IG+Feed+4'">
+                </a>
+            </div>
+
+            <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-rust-orange text-vintage-cream font-retro font-bold text-sm uppercase rounded-xl border-2 border-charcoal-dark shadow-retro hover:bg-terracotta transition-all">
+                <span>Kunjungi Instagram Resmi</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Interactive Registration Modal -->
+    <div id="joinModal" class="fixed inset-0 z-50 hidden bg-charcoal-dark/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-card-cream w-full max-w-lg rounded-2xl border-4 border-charcoal-dark shadow-retro-lg p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
+            
+            <!-- Close Button -->
+            <button onclick="closeJoinModal()" class="absolute top-4 right-4 w-10 h-10 bg-rust-orange text-vintage-cream rounded-full border-2 border-charcoal-dark flex items-center justify-center text-lg font-bold hover:bg-terracotta transition-colors">
+                ✕
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-ochre-yellow rounded-full border-2 border-charcoal-dark flex items-center justify-center text-forest-green text-xl font-bold mx-auto mb-2">
+                    <i class="fa-solid fa-campground"></i>
+                </div>
+                <h3 class="font-retro font-extrabold text-2xl text-forest-green">Formulir Anggota Circle</h3>
+                <p class="text-xs text-slate-gray font-medium mt-1">Isi data singkat untuk masuk dalam grup koordinasi trip Eclipta.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="communityForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                
+                <input type="hidden" id="selectedTrip" name="selectedTrip" value="General Join">
+
+                <div>
+                    <label class="block font-retro font-bold text-xs uppercase text-forest-green mb-1">Nama Lengkap / Panggilan</label>
+                    <input type="text" required placeholder="Contoh: Budi Camping Enthusiast" class="w-full px-4 py-2.5 bg-vintage-cream rounded-xl border-2 border-charcoal-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rust-orange">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-retro font-bold text-xs uppercase text-forest-green mb-1">Nomor WhatsApp</label>
+                        <input type="tel" required placeholder="0812xxxx" class="w-full px-4 py-2.5 bg-vintage-cream rounded-xl border-2 border-charcoal-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rust-orange">
+                    </div>
+                    <div>
+                        <label class="block font-retro font-bold text-xs uppercase text-forest-green mb-1">Username IG</label>
+                        <input type="text" placeholder="@username" class="w-full px-4 py-2.5 bg-vintage-cream rounded-xl border-2 border-charcoal-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rust-orange">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-retro font-bold text-xs uppercase text-forest-green mb-1">Domisili Kota</label>
+                        <input type="text" required placeholder="Jakarta / Bandung" class="w-full px-4 py-2.5 bg-vintage-cream rounded-xl border-2 border-charcoal-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rust-orange">
+                    </div>
+                    <div>
+                        <label class="block font-retro font-bold text-xs uppercase text-forest-green mb-1">Status Gear / Tenda</label>
+                        <select class="w-full px-4 py-2.5 bg-vintage-cream rounded-xl border-2 border-charcoal-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rust-orange">
+                            <option>Punya Tenda Sendiri</option>
+                            <option>Sewa / Join Tenda Kawan</option>
+                            <option>Baru Pemula (Butuh Arahan)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-retro font-bold text-xs uppercase text-forest-green mb-1">Pesan / Catatan Tambahan</label>
+                    <textarea rows="2" placeholder="Sebutkan harapan atau info seputar preferensi kempingmu..." class="w-full px-4 py-2.5 bg-vintage-cream rounded-xl border-2 border-charcoal-dark text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rust-orange"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-rust-orange text-vintage-cream font-retro font-bold text-base uppercase rounded-xl border-2 border-charcoal-dark shadow-retro hover:bg-terracotta transition-all mt-2">
+                    Kirim & Gabung Sekarang <i class="fa-solid fa-paper-plane ml-1"></i>
+                </button>
+
+            </form>
+            
+            <!-- Custom Success Notification Message -->
+            <div id="formSuccessMessage" class="hidden text-center py-6 space-y-3">
+                <div class="w-16 h-16 bg-forest-green text-ochre-yellow rounded-full border-2 border-charcoal-dark flex items-center justify-center text-2xl mx-auto">
+                    <i class="fa-solid fa-check-double"></i>
+                </div>
+                <h4 class="font-retro font-bold text-xl text-forest-green">Selamat Bergabung!</h4>
+                <p class="text-sm text-slate-gray">Data kamu telah terdaftar. Tim admin Eclipta akan menghubungi lewat WhatsApp untuk mengundang ke grup komunitas.</p>
+                <button onclick="closeJoinModal()" class="px-6 py-2 bg-ochre-yellow text-charcoal-dark font-retro font-bold text-xs uppercase rounded-lg border-2 border-charcoal-dark shadow-retro-sm">
+                    Tutup
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Lightbox Modal for Gallery Photos -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-charcoal-dark/90 backdrop-blur-md flex items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="relative max-w-3xl w-full bg-vintage-cream p-4 rounded-2xl border-4 border-charcoal-dark shadow-retro-lg" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-4 -right-4 w-10 h-10 bg-rust-orange text-vintage-cream rounded-full border-2 border-charcoal-dark flex items-center justify-center text-lg font-bold">✕</button>
+            <img id="lightboxImage" src="" alt="Full View" class="w-full h-auto max-h-[75vh] object-cover rounded-xl border-2 border-charcoal-dark">
+            <p id="lightboxCaption" class="font-retro font-bold text-center text-forest-green mt-3 text-lg"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-forest-green text-vintage-cream border-t-4 border-charcoal-dark pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b-2 border-dashed border-vintage-cream/20">
+                
+                <!-- Col 1 Brand -->
+                <div class="md:col-span-5 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-ochre-yellow rounded-full border-2 border-charcoal-dark flex items-center justify-center text-forest-green font-retro font-extrabold text-lg">
+                            <i class="fa-solid fa-campground"></i>
+                        </div>
+                        <span class="font-retro font-extrabold text-xl tracking-wider uppercase text-ochre-yellow">ECLIPTA TENT CIRCLE</span>
+                    </div>
+                    <p class="text-sm text-vintage-cream/80 max-w-sm leading-relaxed">
+                        Komunitas kemping modern retro yang mengutamakan kehangatan kebersamaan dan prinsip pelestarian alam di setiap destinasi outdoor.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="https://www.instagram.com/eclipta_tent_circle" target="_blank" class="w-9 h-9 bg-rust-orange rounded-lg border-2 border-charcoal-dark flex items-center justify-center text-vintage-cream hover:bg-ochre-yellow hover:text-charcoal-dark transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-rust-orange rounded-lg border-2 border-charcoal-dark flex items-center justify-center text-vintage-cream hover:bg-ochre-yellow hover:text-charcoal-dark transition-colors">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-rust-orange rounded-lg border-2 border-charcoal-dark flex items-center justify-center text-vintage-cream hover:bg-ochre-yellow hover:text-charcoal-dark transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2 Links -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="font-retro font-extrabold text-ochre-yellow text-base uppercase">Menu Pintas</h4>
+                    <ul class="space-y-2 text-sm font-medium">
+                        <li><a href="#about" class="hover:text-ochre-yellow transition-colors">→ Tentang Eclipta</a></li>
+                        <li><a href="#features" class="hover:text-ochre-yellow transition-colors">→ Kegiatan Rutin</a></li>
+                        <li><a href="#gallery" class="hover:text-ochre-yellow transition-colors">→ Galeri Foto</a></li>
+                        <li><a href="#events" class="hover:text-ochre-yellow transition-colors">→ Event Trip Bareng</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 Guidelines -->
+                <div class="md:col-span-4 space-y-3">
+                    <h4 class="font-retro font-extrabold text-ochre-yellow text-base uppercase">Aturan Tenda Circle</h4>
+                    <div class="bg-deep-pine p-4 rounded-xl border border-ochre-yellow/30 text-xs text-vintage-cream/80 space-y-2">
+                        <p>🌿 <strong>Leave No Trace:</strong> Bawa pulang sampahmu.</p>
+                        <p>🔥 <strong>Safety Fire:</strong> Pastikan api unggun benar-benar padam.</p>
+                        <p>🤝 <strong>Respect Nature:</strong> Jaga ketenangan alam & sesama camper.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Footer Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-vintage-cream/60 gap-4 text-center sm:text-left">
+                <p>&copy; 2026 Eclipta Tent Circle. All rights reserved.</p>
+                <p>Designed with <i class="fa-solid fa-heart text-rust-orange"></i> for Camping Enthusiasts</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript Logic -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking menu links
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Join Modal Controls
+        function openJoinModal(tripName = '') {
+            const modal = document.getElementById('joinModal');
+            const tripInput = document.getElementById('selectedTrip');
+            if (tripName) {
+                tripInput.value = tripName;
+            }
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeJoinModal() {
+            const modal = document.getElementById('joinModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            
+            // Reset form view
+            document.getElementById('communityForm').classList.remove('hidden');
+            document.getElementById('formSuccessMessage').classList.add('hidden');
+        }
+
+        // Form Submission Logic
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            // Hide form and show success message
+            document.getElementById('communityForm').classList.add('hidden');
+            document.getElementById('formSuccessMessage').classList.remove('hidden');
+        }
+
+        // Lightbox Gallery Controls
+        function openLightbox(imageSrc, caption) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImage');
+            const cap = document.getElementById('lightboxCaption');
+            
+            img.src = imageSrc;
+            cap.innerText = caption;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
